@@ -608,9 +608,11 @@ function CTAFinal() {
 }
 
 /* ---------------------------------- CONTACTO ---------------------------------- */
+const WEB3FORMS_ACCESS_KEY = "a33148ac-e801-4805-be10-d1aeb1b9cfc8";
+
 function Contacto() {
   const [loading, setLoading] = useState(false);
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const fd = new FormData(form);
@@ -625,12 +627,30 @@ function Contacto() {
       toast.error("Ingrese un correo válido.");
       return;
     }
+
+    fd.append("access_key", WEB3FORMS_ACCESS_KEY);
+    fd.append("subject", `Nueva solicitud de cotización de ${nombre}`);
+    fd.append("from_name", "Formulario ACL Ingeniería");
+
     setLoading(true);
-    setTimeout(() => {
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: fd,
+      });
+      const data = await res.json();
+      if (data.success) {
+        toast.success("Solicitud enviada. Un ingeniero se pondrá en contacto pronto.");
+        form.reset();
+      } else {
+        toast.error("No se pudo enviar la solicitud. Intente nuevamente.");
+      }
+    } catch {
+      toast.error("No se pudo enviar la solicitud. Verifique su conexión e intente de nuevo.");
+    } finally {
       setLoading(false);
-      toast.success("Solicitud enviada. Un ingeniero se pondrá en contacto pronto.");
-      form.reset();
-    }, 900);
+    }
   };
 
   return (
