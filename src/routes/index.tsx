@@ -29,7 +29,7 @@ import sEdu from "@/assets/sector-education.jpg";
 import pTelecom from "@/assets/project-telecom.jpg";
 import pPower from "@/assets/project-power.jpg";
 import pLight from "@/assets/project-lighting.jpg";
-import logoAsset from "@/assets/acl-logo.png.asset.json";
+import logoImg from "@/assets/acl-logo.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -755,7 +755,7 @@ function Footer() {
         <div className="lg:col-span-2">
           <div className="inline-flex items-center rounded-xl bg-white p-3 shadow-[var(--shadow-elegant)]">
             <img
-              src={logoAsset.url}
+              src={logoImg}
               alt="ACL Ingeniería y Soluciones Eléctricas S.A.S."
               className="h-14 md:h-16 w-auto object-contain"
             />

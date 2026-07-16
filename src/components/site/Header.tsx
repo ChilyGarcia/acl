@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoAsset from "@/assets/acl-logo.png.asset.json";
+import logoImg from "@/assets/acl-logo.png";
 
 const nav = [
   { label: "Inicio", href: "#inicio" },
@@ -32,7 +32,7 @@ export function Header() {
       <div className="container-x flex h-16 md:h-20 items-center justify-between gap-3">
         <a href="#inicio" className="flex items-center gap-2 min-w-0 shrink" aria-label="ACL Ingeniería y Soluciones Eléctricas S.A.S.">
           <img
-            src={logoAsset.url}
+            src={logoImg}
             alt="ACL Ingeniería y Soluciones Eléctricas S.A.S."
             className="h-10 md:h-14 w-auto object-contain shrink-0"
           />
